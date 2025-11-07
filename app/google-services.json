@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260612163233",
+    "project_id": "juega-y-aprende-468b0",
+    "storage_bucket": "juega-y-aprende-468b0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260612163233:android:bdefdef22868a9431912e0",
+        "android_client_info": {
+          "package_name": "com.example.myapplication2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClBnImSaLdmK9zI_VSZgk0sWemSSAsFZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

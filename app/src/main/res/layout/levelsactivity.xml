@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LevelActivity">
+
+    <!-- Imagen de fondo -->
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@mipmap/fondo_bikini"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvLevelsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Niveles"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:background="#90EE90"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"/>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLevelsTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <!-- Tabla de niveles -->
+    <TableLayout
+        android:id="@+id/tableLevels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLevelsTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <TableRow>
+            <Button
+                android:id="@+id/buttonLevel1"
+                android:text="1"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel2"
+                android:text="2"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel3"
+                android:text="3"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel4"
+                android:text="4"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/buttonLevel5"
+                android:text="5"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel6"
+                android:text="6"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel7"
+                android:text="7"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+            <Button
+                android:id="@+id/buttonLevel8"
+                android:text="8"
+                android:textSize="24sp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rect_button"/>
+        </TableRow>
+    </TableLayout>
+
+    <!-- Botón volver -->
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:backgroundTint="#FF5722"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
