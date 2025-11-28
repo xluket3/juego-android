@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication2.ui.main.MainActivity2;
 import com.example.myapplication2.R;
 import com.example.myapplication2.data.FirestoreRepository;
+import com.example.myapplication2.ui.main.fragments.LevelThreeFragment; // Asegúrate de tener esta importación
 
 public class LevelTwoFragment extends Fragment {
 
@@ -25,6 +26,7 @@ public class LevelTwoFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton radioCorrecta, radioIncorrecta1, radioIncorrecta2;
     private Button buttonSiguiente, buttonNextLevel;
+    private Button buttonAudio; // Declaración para el botón de audio
     private ProgressBar progressBar;
 
     private int currentQuestion = 0;
@@ -76,11 +78,26 @@ public class LevelTwoFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         buttonNextLevel = view.findViewById(R.id.buttonNextLevel);
 
+        // Enlazar el botón de audio.
+        buttonAudio = view.findViewById(R.id.button_audio);
+
         firestoreRepo = new FirestoreRepository();
 
         progressBar.setMax(preguntas.length);
 
         mostrarPregunta();
+
+        // --- Lógica para el botón de Audio (TTS) ---
+        buttonAudio.setOnClickListener(v -> {
+            String textoAPronunciar = parrafos[currentQuestion];
+
+            // Llama al método speakText de la Activity centralizada
+            if (getActivity() instanceof MainActivity2) {
+                ((MainActivity2) getActivity()).speakText(textoAPronunciar);
+            }
+        });
+        // ---------------------------------------------
+
 
         buttonSiguiente.setOnClickListener(v -> {
             int selectedId = radioGroup.getCheckedRadioButtonId();
@@ -98,6 +115,12 @@ public class LevelTwoFragment extends Fragment {
 
                     currentQuestion++;
                     if (currentQuestion < preguntas.length) {
+                        // Solución: Usar getTts() en lugar de .tts.stop()
+                        if (getActivity() instanceof MainActivity2) {
+                            if (((MainActivity2) getActivity()).getTts() != null) {
+                                ((MainActivity2) getActivity()).getTts().stop();
+                            }
+                        }
                         radioGroup.postDelayed(this::mostrarPregunta, 1000);
                     } else {
                         buttonSiguiente.setEnabled(false);
@@ -119,7 +142,11 @@ public class LevelTwoFragment extends Fragment {
         });
 
         buttonNextLevel.setOnClickListener(v -> {
+            // Solución: Usar getTts() en lugar de .tts.stop()
             if (getActivity() instanceof MainActivity2) {
+                if (((MainActivity2) getActivity()).getTts() != null) {
+                    ((MainActivity2) getActivity()).getTts().stop();
+                }
                 ((MainActivity2) getActivity()).abrirNivel(new LevelThreeFragment());
             }
         });

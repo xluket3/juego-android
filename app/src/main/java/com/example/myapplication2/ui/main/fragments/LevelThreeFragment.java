@@ -25,6 +25,7 @@ public class LevelThreeFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton radioCorrecta, radioIncorrecta1, radioIncorrecta2;
     private Button buttonSiguiente, buttonNextLevel;
+    private Button buttonAudio; // Declaración para el botón de audio
     private ProgressBar progressBar;
 
     private int currentQuestion = 0;
@@ -77,11 +78,26 @@ public class LevelThreeFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         buttonNextLevel = view.findViewById(R.id.buttonNextLevel);
 
+        // Enlazar el botón de audio. (Asegúrate de que 'button_audio' exista en tu XML)
+        buttonAudio = view.findViewById(R.id.button_audio);
+
         firestoreRepo = new FirestoreRepository();
 
         progressBar.setMax(preguntas.length);
 
         mostrarPregunta();
+
+        // --- Lógica para el botón de Audio (TTS) ---
+        buttonAudio.setOnClickListener(v -> {
+            String textoAPronunciar = parrafos[currentQuestion];
+
+            // Llama al método speakText de la Activity centralizada
+            if (getActivity() instanceof MainActivity2) {
+                ((MainActivity2) getActivity()).speakText(textoAPronunciar);
+            }
+        });
+        // ---------------------------------------------
+
 
         buttonSiguiente.setOnClickListener(v -> {
             int selectedId = radioGroup.getCheckedRadioButtonId();
@@ -99,6 +115,12 @@ public class LevelThreeFragment extends Fragment {
 
                     currentQuestion++;
                     if (currentQuestion < preguntas.length) {
+                        // DETENER AUDIO (CORREGIDO: Usando getTts())
+                        if (getActivity() instanceof MainActivity2) {
+                            if (((MainActivity2) getActivity()).getTts() != null) {
+                                ((MainActivity2) getActivity()).getTts().stop();
+                            }
+                        }
                         radioGroup.postDelayed(this::mostrarPregunta, 1000);
                     } else {
                         buttonSiguiente.setEnabled(false);
@@ -120,7 +142,11 @@ public class LevelThreeFragment extends Fragment {
         });
 
         buttonNextLevel.setOnClickListener(v -> {
+            // DETENER AUDIO (CORREGIDO: Usando getTts())
             if (getActivity() instanceof MainActivity2) {
+                if (((MainActivity2) getActivity()).getTts() != null) {
+                    ((MainActivity2) getActivity()).getTts().stop();
+                }
                 ((MainActivity2) getActivity()).abrirNivel(new LevelFourFragment());
             }
         });
@@ -138,5 +164,7 @@ public class LevelThreeFragment extends Fragment {
         textViewParrafo.setText(parrafos[currentQuestion]);
         textViewPregunta.setText(preguntas[currentQuestion]);
         radioGroup.clearCheck();
+
+        // **OPCIONAL**: Puedes detener el audio aquí también si quieres que se silencie al cargar la pregunta.
     }
 }
